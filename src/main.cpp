@@ -1,4 +1,5 @@
 #include <iostream>
+#include "janggi_piece.h"
 #include "janggi_board.h"
 
 #define GENERAL_RED     "\033[31m漢\033[0m"
@@ -24,27 +25,35 @@
 
 
 int main() {
-    Janggi_Board board;
-    vector<string> pieces;
-    pieces.push_back(GENERAL_RED);
-    pieces.push_back(GENERAL_BLUE);
+    // unique_ptr automatically delets its memory allocation when needed
+    unique_ptr<Janggi_Piece> chariot_red_1 = make_unique<Janggi_Piece>(CHARIOT_RED, 0,0,"red");
+    unique_ptr<Janggi_Piece> elephant_red_1 = make_unique<Janggi_Piece>(ELEPHANT_RED, 0,1,"red");
+    unique_ptr<Janggi_Piece> horse_red_1 = make_unique<Janggi_Piece>(HORSE_RED, 0,2,"red");
+    unique_ptr<Janggi_Piece> guard_red_1 = make_unique<Janggi_Piece>(GUARD_RED, 0,3,"red");
+    unique_ptr<Janggi_Piece> guard_red2 = make_unique<Janggi_Piece>(GUARD_RED, 0,5,"red");
+    unique_ptr<Janggi_Piece> elephenat_red_2 = make_unique<Janggi_Piece>(ELEPHANT_RED, 0,6,"red");
+    unique_ptr<Janggi_Piece> horse_red_2 = make_unique<Janggi_Piece>(HORSE_RED, 0,7,"red");
+    unique_ptr<Janggi_Piece> chariot_red_2 = make_unique<Janggi_Piece>(CHARIOT_RED, 0,8,"red");
 
-    pieces.push_back(GUARD_RED);
-    pieces.push_back(GUARD_BLUE);
+    unique_ptr<Janggi_Piece> general_red = make_unique<Janggi_Piece>(GENERAL_RED, 1,4,"red");
 
-    pieces.push_back(HORSE_RED);
-    pieces.push_back(HORSE_BLUE);
+    unique_ptr<Janggi_Piece> cannon_red_1 = make_unique<Janggi_Piece>(CANNON_RED, 2,1,"red");
+    unique_ptr<Janggi_Piece> cannon_red_2 = make_unique<Janggi_Piece>(CANNON_RED, 2,7,"red");
 
-    pieces.push_back(ELEPHANT_RED);
-    pieces.push_back(ELEPAHNT_BLUE);
+    unique_ptr<Janggi_Piece> soldier_red_1 = make_unique<Janggi_Piece>(SOLDIER_RED, 3,0,"red");
+    unique_ptr<Janggi_Piece> soldier_red_2 = make_unique<Janggi_Piece>(SOLDIER_RED, 3,2,"red");
+    unique_ptr<Janggi_Piece> soldier_red_3 = make_unique<Janggi_Piece>(SOLDIER_RED, 3,4,"red");
+    unique_ptr<Janggi_Piece> soldier_red_4 = make_unique<Janggi_Piece>(SOLDIER_RED, 3,6,"red");
+    unique_ptr<Janggi_Piece> soldier_red_5 = make_unique<Janggi_Piece>(SOLDIER_RED, 3,8,"red");
 
 
 
-    for(int i = 0; i < 8; i++) {
-        for(int j = 0; j < 9; j++) {
-            board.add_piece(i, j, pieces[i]);
+    vector<vector<Janggi_Piece>> pieces;
+    for (int r = 0; r < 9; r++) {
+        for (int c = 0; c < 9; c++) {
         }
     }
+
 
     board.display_board();
 
