@@ -25,34 +25,53 @@
 
 
 int main() {
+
+    vector<vector<Janggi_Piece>> janggi_2d_matrix(10, vector<Janggi_Piece>(10));
+
     // unique_ptr automatically delets its memory allocation when needed
-    unique_ptr<Janggi_Piece> chariot_red_1 = make_unique<Janggi_Piece>(CHARIOT_RED, 0,0,"red");
-    unique_ptr<Janggi_Piece> elephant_red_1 = make_unique<Janggi_Piece>(ELEPHANT_RED, 0,1,"red");
-    unique_ptr<Janggi_Piece> horse_red_1 = make_unique<Janggi_Piece>(HORSE_RED, 0,2,"red");
-    unique_ptr<Janggi_Piece> guard_red_1 = make_unique<Janggi_Piece>(GUARD_RED, 0,3,"red");
-    unique_ptr<Janggi_Piece> guard_red2 = make_unique<Janggi_Piece>(GUARD_RED, 0,5,"red");
-    unique_ptr<Janggi_Piece> elephenat_red_2 = make_unique<Janggi_Piece>(ELEPHANT_RED, 0,6,"red");
-    unique_ptr<Janggi_Piece> horse_red_2 = make_unique<Janggi_Piece>(HORSE_RED, 0,7,"red");
-    unique_ptr<Janggi_Piece> chariot_red_2 = make_unique<Janggi_Piece>(CHARIOT_RED, 0,8,"red");
+    // red team
+    janggi_2d_matrix[0,0] = Janggi_Piece(CHARIOT_RED, make_tuple(0,0),"red");
+    janggi_2d_matrix[0,1] = Janggi_Piece(ELEPHANT_RED, make_tuple(0,1),"red");
+    janggi_2d_matrix[0,2] = Janggi_Piece(HORSE_RED, make_tuple(0,2),"red");
+    janggi_2d_matrix[0,3] = Janggi_Piece(GUARD_RED, make_tuple(0,3),"red");
+    janggi_2d_matrix[0,5] = Janggi_Piece(GUARD_RED, make_tuple(0,5),"red");
+    janggi_2d_matrix[0,6] = Janggi_Piece(ELEPHANT_RED, make_tuple(0,6),"red");
+    janggi_2d_matrix[0,7] = Janggi_Piece(HORSE_RED, make_tuple(0,7),"red");
+    janggi_2d_matrix[0,8] = Janggi_Piece(CHARIOT_RED, make_tuple(0,8),"red");
 
-    unique_ptr<Janggi_Piece> general_red = make_unique<Janggi_Piece>(GENERAL_RED, 1,4,"red");
+    janggi_2d_matrix[1,4] = Janggi_Piece(GENERAL_RED, make_tuple(1,4),"red");
 
-    unique_ptr<Janggi_Piece> cannon_red_1 = make_unique<Janggi_Piece>(CANNON_RED, 2,1,"red");
-    unique_ptr<Janggi_Piece> cannon_red_2 = make_unique<Janggi_Piece>(CANNON_RED, 2,7,"red");
+    janggi_2d_matrix[2,1] = Janggi_Piece(CANNON_RED, make_tuple(2,1),"red");
+    janggi_2d_matrix[2,7] = Janggi_Piece(CANNON_RED, make_tuple(2,7),"red");
 
-    unique_ptr<Janggi_Piece> soldier_red_1 = make_unique<Janggi_Piece>(SOLDIER_RED, 3,0,"red");
-    unique_ptr<Janggi_Piece> soldier_red_2 = make_unique<Janggi_Piece>(SOLDIER_RED, 3,2,"red");
-    unique_ptr<Janggi_Piece> soldier_red_3 = make_unique<Janggi_Piece>(SOLDIER_RED, 3,4,"red");
-    unique_ptr<Janggi_Piece> soldier_red_4 = make_unique<Janggi_Piece>(SOLDIER_RED, 3,6,"red");
-    unique_ptr<Janggi_Piece> soldier_red_5 = make_unique<Janggi_Piece>(SOLDIER_RED, 3,8,"red");
+    janggi_2d_matrix[3,0] = Janggi_Piece(SOLDIER_RED, make_tuple(3,0),"red");
+    janggi_2d_matrix[3,2] = Janggi_Piece(SOLDIER_RED, make_tuple(3,2),"red");
+    janggi_2d_matrix[3,4] = Janggi_Piece(SOLDIER_RED, make_tuple(3,4),"red");
+    janggi_2d_matrix[3,6] = Janggi_Piece(SOLDIER_RED, make_tuple(3,6),"red");
+    janggi_2d_matrix[3,8] = Janggi_Piece(SOLDIER_RED, make_tuple(3,8),"red");
 
+    // blue team
+    janggi_2d_matrix[9,0] = Janggi_Piece(CHARIOT_BLUE, make_tuple(9,0),"blue");
+    janggi_2d_matrix[9,1] = Janggi_Piece(ELEPHANT_BLUE, make_tuple(9,1),"blue");
+    janggi_2d_matrix[9,2] = Janggi_Piece(HORSE_BLUE, make_tuple(9,2),"blue");
+    janggi_2d_matrix[9,3] = Janggi_Piece(GUARD_BLUE, make_tuple(9,3),"blue");
+    janggi_2d_matrix[9,5] = Janggi_Piece(GUARD_BLUE, make_tuple(9,5),"blue");
+    janggi_2d_matrix[9,6] = Janggi_Piece(ELEPHANT_BLUE, make_tuple(9,6),"blue");
+    janggi_2d_matrix[9,7] = Janggi_Piece(HORSE_BLUE, make_tuple(9,7),"blue");
+    janggi_2d_matrix[9,8] = Janggi_Piece(CHARIOT_BLUE, make_tuple(9,8),"blue");
 
+    janggi_2d_matrix[8,4] = Janggi_Piece(GENERAL_BLUE, make_tuple(8,4),"blue");
 
-    vector<vector<Janggi_Piece>> pieces;
-    for (int r = 0; r < 9; r++) {
-        for (int c = 0; c < 9; c++) {
-        }
-    }
+    janggi_2d_matrix[7,1] = Janggi_Piece(CANNON_BLUE, make_tuple(7,1),"blue");
+    janggi_2d_matrix[7,7] = Janggi_Piece(CANNON_BLUE, make_tuple(7,7),"blue");
+
+    janggi_2d_matrix[6,0] = Janggi_Piece(SOLDIER_BLUE, make_tuple(6,0),"blue");
+    janggi_2d_matrix[6,2] = Janggi_Piece(SOLDIER_BLUE, make_tuple(6,2),"blue");
+    janggi_2d_matrix[6,4] = Janggi_Piece(SOLDIER_BLUE, make_tuple(6,4),"blue");
+    janggi_2d_matrix[6,6] = Janggi_Piece(SOLDIER_BLUE, make_tuple(6,6),"blue");
+    janggi_2d_matrix[6,8] = Janggi_Piece(SOLDIER_BLUE, make_tuple(6,8),"blue");
+
+    Janggi_Board board = Janggi_Board(janggi_2d_matrix);
 
 
     board.display_board();

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <tuple>
 
 // header guard start
 #ifndef JANGGI_PIECE_H
@@ -8,23 +9,27 @@ using namespace std;
 
 class Janggi_Piece {
 public:
-    // Constructor
-    Janggi_Piece(string name, int pos_row, int pos_col, string team);
+    // default constructor: this default piece acts as a place holder.
+    Janggi_Piece();
+    // constructor
+    Janggi_Piece(string name, tuple<int,int> position, string team);
 
-    // Member functions
+    // member functions
+    // get the name
+    string get_name();
+    // move the janggi piece to point with (row,col)
     bool move(int row, int col);
     // renew the position
-    void renew_pos(int row, int col);
+    void renew_pos(tuple<int,int> new_pos);
+    // get the position
+    tuple<int,int> get_pos();
 
 
 private:
     string hanja; // name of the piece
-    int pos_r;
-    int pos_c;
+    tuple<int,int> pos; // position of the janggi piece, represents (row, col)
     string team_colour;
-}
-
-
+};
 
 // header guard end
 #endif

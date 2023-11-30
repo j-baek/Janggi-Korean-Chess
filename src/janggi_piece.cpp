@@ -1,15 +1,23 @@
 #include "janggi_piece.h"
 
-// Constructor implementation
-Janggi_Piece::Janggi_Piece(string name, int pos_row, int pos_col, string team) {
+// default constructor implementation
+Janggi_Piece::Janggi_Piece() {
+    hanja = " ";
+    pos = make_tuple(-1,-1); // for all default piece, it has pos of (-1,-1)
+    team_colour = "";
+}
+// constructor implementation
+Janggi_Piece::Janggi_Piece(string name, tuple<int,int> position , string team) {
     // set the private variable
     hanja = name;
-    pos_r = pos_row;
-    pos_c = pos_col;
+    pos = position;
     team_colour = team;
 }
 
 // Member functions
+string get_name() {
+    return hanja;
+}
 bool move(int row, int col){
     return true;
 }

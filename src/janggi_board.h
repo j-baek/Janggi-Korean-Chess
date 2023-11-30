@@ -20,8 +20,8 @@ public:
     void display_board();
 
 private:
-    int row = 9;
-    int col = 9;
+    int row = 10;
+    int col = 10;
     vector<vector<string>> board;
     vector<vector<Janggi_Piece>> janggi_state;
 };
