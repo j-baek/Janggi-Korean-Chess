@@ -3,7 +3,7 @@
 
 // header guard start
 #ifndef JANGGI_PIECE_H
-#define JANGGI_BOARD_H
+#define JANGGI_PIECE_H
 
 using namespace std;
 
@@ -23,6 +23,8 @@ public:
     void renew_pos(tuple<int,int> new_pos);
     // get the position
     tuple<int,int> get_pos();
+    // renew whole state
+    void renew_state(string name, tuple<int,int> position, string team);
 
 
 private:

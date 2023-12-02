@@ -21,9 +21,8 @@ public:
 
 private:
     int row = 10;
-    int col = 10;
-    vector<vector<string>> board;
-    vector<vector<Janggi_Piece>> janggi_state;
+    int col = 9;
+    vector<vector<Janggi_Piece>> board;
 };
 
 

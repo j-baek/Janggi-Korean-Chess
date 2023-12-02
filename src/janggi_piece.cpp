@@ -2,7 +2,7 @@
 
 // default constructor implementation
 Janggi_Piece::Janggi_Piece() {
-    hanja = " ";
+    hanja = "  ";
     pos = make_tuple(-1,-1); // for all default piece, it has pos of (-1,-1)
     team_colour = "";
 }
@@ -15,12 +15,22 @@ Janggi_Piece::Janggi_Piece(string name, tuple<int,int> position , string team) {
 }
 
 // Member functions
-string get_name() {
+string Janggi_Piece::get_name(){
     return hanja;
 }
-bool move(int row, int col){
+bool Janggi_Piece::move(int row, int col){
     return true;
 }
-void renew_pos(){
+void Janggi_Piece::renew_pos(tuple<int,int> new_pos){
     return;
+}
+
+tuple<int,int> Janggi_Piece::get_pos() {
+    return pos;
+}
+
+void Janggi_Piece::renew_state(string name, tuple<int,int> position, string team){
+    hanja = name;
+    pos = position;
+    team_colour = team;
 }

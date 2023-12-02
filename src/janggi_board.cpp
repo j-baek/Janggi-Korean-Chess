@@ -1,10 +1,11 @@
 #include "janggi_board.h"
 
 // Constructor implementation
-Janggi_Board::Janggi_Board(vector<vector<Janggi_Piece*>> j_pieces) {
+Janggi_Board::Janggi_Board(vector<vector<Janggi_Piece>> j_pieces) {
     // set the private variable
-    janggi_state = j_pieces;
+    board = j_pieces;
     // initialize board
+    /*
     for (int i = 0; i < row; i++) {
         vector<Janggi_Piece> board_row;
         for (int j = 0; j < col; j++) {
@@ -12,6 +13,7 @@ Janggi_Board::Janggi_Board(vector<vector<Janggi_Piece*>> j_pieces) {
         }
         board.push_back(board_row);
     } 
+    */
 }
 
 // Member functions
