@@ -18,6 +18,10 @@ public:
     // Member functions
     // display current state of the board
     void display_board();
+    // return board
+    vector<vector<Janggi_Piece>> get_board();
+    // renew the board state when changes happen to janggi pieces
+    void renew_state(Janggi_Piece p1, tuple<int,int> new_pos);
 
 private:
     int row = 10;

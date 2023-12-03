@@ -96,17 +96,36 @@ Janggi_Board::Janggi_Board() {
    - - - - - - - - - - - - - - - - - - - -
 */
 void Janggi_Board::display_board() {
-    // first display all the row number
-    cout<<"    0     1    2    3    4    5    6    8    9"<<endl;
-    // now display the boarder line
-    cout<<"   - - - - - - - - - - - - - - - - - - - - - - - "<<endl;
+   // first display all the row number
+   cout<<"    0     1    2    3    4    5    6    8    9"<<endl;
+   // now display the boarder line
+   cout<<"   - - - - - - - - - - - - - - - - - - - - - - - "<<endl;
 
-    for (int i = 0; i < row; i++) {
-        cout<<i<<" | ";
-        for (int j = 0; j < col; j++){
-            cout<<board[i][j].get_name()<<" | ";
-        }
-        cout<<endl;;
-        cout<<"   - - - - - - - - - - - - - - - - - - - - - - - "<<endl;
-    }
+   for (int i = 0; i < row; i++) {
+      cout<<i<<" | ";
+      for (int j = 0; j < col; j++){
+         cout<<board[i][j].get_name()<<" | ";
+      }
+      cout<<endl;;
+      cout<<"   - - - - - - - - - - - - - - - - - - - - - - - "<<endl;
+   }
+   cout<<endl<<endl;
+
 }
+
+vector<vector<Janggi_Piece>> Janggi_Board::get_board() {
+   return board;
+}
+
+void Janggi_Board::renew_state(Janggi_Piece p1, tuple<int,int> new_pos) {
+   // tuple first element = row, second element = col
+   tuple<int,int> p1_pos = p1.get_pos();
+   // for previous position of p1, place dummy janggi piece
+   board[get<0>(p1_pos)][get<1>(p1_pos)] = Janggi_Piece();
+   // renew position for p1
+   p1.renew_pos(new_pos);
+   board[get<0>(new_pos)][get<1>(new_pos)] = p1;
+
+   return;
+}
+
