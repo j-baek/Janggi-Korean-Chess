@@ -17,14 +17,14 @@ public:
     // member functions
     // get the name
     string get_name();
+    // get team colour
+    string get_team_colour();
     // move the janggi piece to point with (row,col)
     bool move(int row, int col);
     // renew the position
     void renew_pos(tuple<int,int> new_pos);
     // get the position
     tuple<int,int> get_pos();
-    // renew whole state
-    void renew_state(string name, tuple<int,int> position, string team);
 
 
 private:

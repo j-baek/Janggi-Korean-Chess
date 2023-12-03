@@ -13,5 +13,17 @@ int main() {
 
     b.display_board();
 
+    Janggi_Piece general_b = b.get_board()[8][4];
+    bool moving = general_b.move(10,10);
+    cout<<moving<<endl;
+
+    moving = general_b.move(8,3);
+    cout<<moving<<endl;
+    
+    tuple<int,int> new_pos2(8,5);
+    b.renew_state(general_b, new_pos2);
+    tuple<int,int> new_pos3(8,6);
+    b.renew_state(general_b,new_pos2);
+
     return 0;
 }
