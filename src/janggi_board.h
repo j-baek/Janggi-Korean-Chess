@@ -13,7 +13,7 @@ using namespace std;
 class Janggi_Board {
 public:
     // Constructor
-    Janggi_Board(vector<vector<Janggi_Piece>> j_pieces);
+    Janggi_Board();
 
     // Member functions
     // display current state of the board
