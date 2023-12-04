@@ -1,5 +1,9 @@
 # Janggi-Korean-Chess
 Janggi (Korean Chess) is a fun board game. Now you can play Janggi on a terminal!
+<br />
+<br />
+![alt text](https://github.com/j-baek/Janggi-Korean-Chess/blob/main/janggi.png)
+
 
 ## check-list for Janggi (Korean Chess)
 - [X] make a board and display it 
