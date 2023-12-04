@@ -50,18 +50,60 @@ bool Janggi_Piece::move(int new_row, int new_col){
     int p_col = get<1>(pos);
 
     if(hanja == GENERAL_RED || GENERAL_BLUE) {
-        if(abs(p_row - new_row) > 1 || abs(p_col - new_col) > 1) {
-            cout<<"not valid move"<<endl;
-            return false;
-        } else {
+        // check if the general is moving more than it can
+        if(abs(p_row - new_row) > 1 || 
+            abs(p_col - new_col) > 1) {return false;}
 
-            cout<<"valid move"<<endl;
-            return true;
+        if (team_colour == "red") {
+            // when general_red is at center (1,4), it can move diagonally as well
+            if(p_row == 1 && p_col == 4) {return true;}
+            // general_red has to stay at its palace (0<= row <= 2),(3<= col <= 5)
+            if(new_row >= 3) {return false;}
+            if(new_col <= 2 || new_col >= 6) {return false;}
+            // when general_red is not at center, it can move straight unless moving back to the center
+            if(new_row == 1 && new_col == 4) {return true;}
+            // moving straight means only changing either row or col, and not both
+            if(abs(p_row - new_row) + abs(p_col - new_col) == 1) {return true;}
+            return false;
+        } else { // team colour == "blue"
+            // when general_blue is at center (8,4), it can move diagonally as well
+            if(p_row == 8 && p_col == 4) {return true;}
+            // general_blue has to stay at its palace (7<= row <= 9),(3<= col <= 5)
+            if(new_row <= 6) {return false;}
+            if(new_col <= 2 || new_col >= 6) {return false;}
+            // when genera_blue is not at center, it can move straight unless moving back to the center
+            if(new_row == 8 && new_col == 4) {return true;}
+            // moving straight means only changing either row or col, and not both
+            if(abs(p_row - new_row) + abs(p_col - new_col) == 1) {return true;}
+            return false;
         }
+
+        return false;
     }
+    /*
+    if(hanja == GUARD_RED || GUARD_BLUE) {
+
+    }
+    if(hanja == HORSE_RED || HORSE_BLUE) {
+
+    }
+    if(hanja == ELEPHANT_RED || ELEPHANT_BLUE) {
+
+    }
+    if(hanja == CHARIOT_RED || CHARIOT_BLUE) {
+
+    }
+    if(hanja == CANNON_RED || CANNON_BLUE) {
+
+    }
+    if(hanja == SOLDIER_RED || SOLDIER_BLUE) {
+
+    }
+    */
     return false;
 }
 void Janggi_Piece::renew_pos(tuple<int,int> new_pos){
+    pos = new_pos;
     return;
 }
 

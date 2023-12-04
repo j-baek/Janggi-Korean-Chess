@@ -117,24 +117,30 @@ vector<vector<Janggi_Piece>> Janggi_Board::get_board() {
    return board;
 }
 
-void Janggi_Board::renew_state(Janggi_Piece p1, tuple<int,int> new_pos) {
+void Janggi_Board::renew_state(Janggi_Piece p1, int new_row, int new_col) {
    // tuple first element = row, second element = col
    tuple<int,int> p1_pos = p1.get_pos();
-   int prev_row = get<0>(p1_pos);
-   int prev_col = get<1>(p1_pos);
+   int curr_row = get<0>(p1_pos);
+   int curr_col = get<1>(p1_pos);
    
-   int new_row = get<0>(new_pos);
-   int new_col = get<1>(new_pos);
-   // for previous position of p1, place dummy janggi piece
-   board[prev_row][prev_col] = Janggi_Piece();
-   // renew position for p1, if it is within row,col boundaries and not 
-   // attacking its own team
-   if(new_row > 0 && new_col > 0 && 
+   // renew position for p1 when
+   // new position is in the boundary
+   // new position is not attacking its own team
+   // new position is a valid move
+   if(new_row >= 0 && new_col >= 0 && 
       new_row < row && new_col < col &&
-      board[new_row][new_col].get_team_colour() != p1.get_team_colour()){
+      board[new_row][new_col].get_team_colour() != p1.get_team_colour() &&
+      p1.move(new_row, new_col) == true){
       
+      tuple<int,int> new_pos(new_row,new_col);
       p1.renew_pos(new_pos);
+
+      // for a current position, put a dummy piece
+      Janggi_Piece dummy = Janggi_Piece();
+      board[curr_row][curr_col] = dummy;
+      // put p1 on a new position
       board[new_row][new_col] = p1;
+
       display_board();
    } else {
       cout<<"invalid move!"<<endl;
