@@ -97,7 +97,7 @@ Janggi_Board::Janggi_Board() {
 */
 void Janggi_Board::display_board() {
    // first display all the row number
-   cout<<"    0     1    2    3    4    5    6    8    9"<<endl;
+   cout<<"    0     1    2    3    4    5    6    7    8"<<endl;
    // now display the boarder line
    cout<<"   - - - - - - - - - - - - - - - - - - - - - - - "<<endl;
 
@@ -137,12 +137,18 @@ void Janggi_Board::renew_state(Janggi_Piece p1, int new_row, int new_col) {
          if(abs(new_row - curr_row) == 1) { // means it moves left or right first (col) then move diagonally
             // check if it is trying to jump over
             // if the piece next to p1 is dummy piece, the team colour is an empty string
-            if(new_col > curr_col && !board[curr_row][curr_col +1].get_team_colour().empty()) {return;}
-            // when new_col < curr_col
-            if(!board[curr_row][curr_col -1].get_team_colour().empty()) {return;}
+            if(new_col > curr_col) {
+               if(!board[curr_row][curr_col + 1].get_team_colour().empty()) {return;}
+            } else{ // new_col < curr_col
+               if(!board[curr_row][curr_col - 1].get_team_colour().empty()) {return;}
+            }
+
          } else { // when difference between new row and new col == 2, means it moves up or down first (row), then move diagonally
-            if(new_row > curr_row && !board[curr_row +1][curr_col].get_team_colour().empty()) {return;}
-            if(!board[curr_row -1][curr_col].get_team_colour().empty()) {return;}
+            if(new_row > curr_row) {
+               if(!board[curr_row + 1][curr_col].get_team_colour().empty()) {return;}
+            } else { // new_row < curr_row
+               if(!board[curr_row -1][curr_col].get_team_colour().empty()) {return;}
+            }
          }
       }
       

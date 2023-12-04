@@ -53,7 +53,8 @@ bool Janggi_Piece::move(int new_row, int new_col){
     int abs_col = abs(p_col - new_col);
 
     // generals and guards can only move within the palace, and their movment limits are same
-    if(hanja == GENERAL_RED || GENERAL_BLUE || GUARD_RED || GUARD_BLUE) {
+    if(hanja == GENERAL_RED || hanja == GENERAL_BLUE || 
+        hanja == GUARD_RED || hanja == GUARD_BLUE) {
         // check if the general is moving more than it can
         if(abs_row > 1 || abs_col > 1) {return false;}
 
