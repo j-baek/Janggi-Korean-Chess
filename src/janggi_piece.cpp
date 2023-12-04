@@ -85,16 +85,19 @@ bool Janggi_Piece::move(int new_row, int new_col){
         return false;
     }
 
-    if(hanja == HORSE_RED || HORSE_BLUE) {
+    if(hanja == HORSE_RED || hanja == HORSE_BLUE) {
         // horses can move one step orthogonally then one step diagonally outward, with no jumping
         if(abs_row == 1 && abs_col == 2) {return true;}
         if(abs_row == 2 && abs_col == 1) {return true;}
         return false;
     }
-    /*
-    if(hanja == ELEPHANT_RED || ELEPHANT_BLUE) {
-
+    if(hanja == ELEPHANT_RED || hanja == ELEPHANT_BLUE) {
+        // elephants can move one step orthogonally then two steps diagonally outwards, with no jumping 
+        if(abs_row == 3 && abs_col == 2) {return true;}
+        if(abs_row == 2 && abs_col == 3) {return true;}
+        return false;
     }
+    /*
     if(hanja == CHARIOT_RED || CHARIOT_BLUE) {
 
     }

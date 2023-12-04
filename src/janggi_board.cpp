@@ -131,10 +131,12 @@ void Janggi_Board::renew_state(Janggi_Piece p1, int new_row, int new_col) {
       new_row < row && new_col < col &&
       board[new_row][new_col].get_team_colour() != p1.get_team_colour() &&
       p1.move(new_row, new_col) == true){
+      
+      int abs_row = abs(new_row - curr_row);
 
       // condition for horse: it cannot jump over other piece
       if(p1.get_name() == HORSE_RED || p1.get_name() == HORSE_BLUE) {
-         if(abs(new_row - curr_row) == 1) { // means it moves left or right first (col) then move diagonally
+         if(abs_row == 1) { // means it moves left or right first (col) then move diagonally
             // check if it is trying to jump over
             // if the piece next to p1 is dummy piece, the team colour is an empty string
             if(new_col > curr_col) {
@@ -150,6 +152,45 @@ void Janggi_Board::renew_state(Janggi_Piece p1, int new_row, int new_col) {
                if(!board[curr_row -1][curr_col].get_team_colour().empty()) {return;}
             }
          }
+      }
+
+      // condition for elephants: it cannot jump over other piece
+      if(p1.get_name() == ELEPHANT_RED || p1.get_name() == ELEPHANT_BLUE) {
+         if(abs_row == 2) { // means it moves left or right first (col)
+            // check if it is trying to jump over
+            if(new_col > curr_col) {
+               if(!board[curr_row][curr_col + 1].get_team_colour().empty()) {return;}
+               if(new_row > curr_row) {
+                  if(!board[curr_row + 1][curr_col + 2].get_team_colour().empty()) {return;}
+               } else { // new_row < curr_row
+                  if(!board[curr_row - 1][curr_col + 2].get_team_colour().empty()) {return;}
+               }
+            } else{ // new_col < curr_col
+               if(!board[curr_row][curr_col - 1].get_team_colour().empty()) {return;}
+               if(new_row > curr_row) {
+                  if(!board[curr_row + 1][curr_col - 2].get_team_colour().empty()) {return;}
+               } else { // new_row < curr_row
+                  if(!board[curr_row - 1][curr_col - 2].get_team_colour().empty()) {return;}
+               }
+            }
+         } else { // when abs_row == 3, means it moves up or down first (row)
+            // check if it is trying to jump over
+            if(new_row > curr_row) {
+               if(!board[curr_row + 1][curr_col].get_team_colour().empty()) {return;}
+               if(new_col > curr_col) {
+                  if(!board[curr_row + 2][curr_col + 1].get_team_colour().empty()) {return;}
+               } else { // new_col < curr_col
+                  if(!board[curr_row + 2][curr_col - 1].get_team_colour().empty()) {return;}
+               }
+            } else{ // new_row < curr_row
+               if(!board[curr_row -1][curr_col].get_team_colour().empty()) {return;}
+               if(new_col > curr_col) {
+                  if(!board[curr_row - 2][curr_col + 1].get_team_colour().empty()) {return;}
+               } else { // new_col < curr_col
+                  if(!board[curr_row - 2][curr_col - 1].get_team_colour().empty()) {return;}
+               }
+            }
+         } 
       }
       
       tuple<int,int> new_pos(new_row,new_col);
