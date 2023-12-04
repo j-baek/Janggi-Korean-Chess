@@ -117,7 +117,8 @@ vector<vector<Janggi_Piece>> Janggi_Board::get_board() {
    return board;
 }
 
-void Janggi_Board::renew_state(Janggi_Piece p1, int new_row, int new_col) {
+// return true if renewing state is available. Return false otherwise
+bool Janggi_Board::renew_state(Janggi_Piece p1, int new_row, int new_col) {
    // tuple first element = row, second element = col
    tuple<int,int> p1_pos = p1.get_pos();
    int curr_row = get<0>(p1_pos);
@@ -140,16 +141,24 @@ void Janggi_Board::renew_state(Janggi_Piece p1, int new_row, int new_col) {
             // check if it is trying to jump over
             // if the piece next to p1 is dummy piece, the team colour is an empty string
             if(new_col > curr_col) {
-               if(!board[curr_row][curr_col + 1].get_team_colour().empty()) {return;}
+               if(!board[curr_row][curr_col + 1].get_team_colour().empty()) {
+                  cout <<"invalid movement!"<<endl;
+                  return false;}
             } else{ // new_col < curr_col
-               if(!board[curr_row][curr_col - 1].get_team_colour().empty()) {return;}
+               if(!board[curr_row][curr_col - 1].get_team_colour().empty()) {
+                  cout <<"invalid movement!"<<endl;
+                  return false;}
             }
 
          } else { // when difference between new row and new col == 2, means it moves up or down first (row), then move diagonally
             if(new_row > curr_row) {
-               if(!board[curr_row + 1][curr_col].get_team_colour().empty()) {return;}
+               if(!board[curr_row + 1][curr_col].get_team_colour().empty()) {
+                  cout <<"invalid movement!"<<endl;
+                  return false;}
             } else { // new_row < curr_row
-               if(!board[curr_row -1][curr_col].get_team_colour().empty()) {return;}
+               if(!board[curr_row -1][curr_col].get_team_colour().empty()) {
+                  cout <<"invalid movement!"<<endl;
+                  return false;}
             }
          }
       }
@@ -159,35 +168,59 @@ void Janggi_Board::renew_state(Janggi_Piece p1, int new_row, int new_col) {
          if(abs_row == 2) { // means it moves left or right first (col)
             // check if it is trying to jump over
             if(new_col > curr_col) {
-               if(!board[curr_row][curr_col + 1].get_team_colour().empty()) {return;}
+               if(!board[curr_row][curr_col + 1].get_team_colour().empty()) {
+                  cout <<"invalid movement!"<<endl;
+                  return false;}
                if(new_row > curr_row) {
-                  if(!board[curr_row + 1][curr_col + 2].get_team_colour().empty()) {return;}
+                  if(!board[curr_row + 1][curr_col + 2].get_team_colour().empty()) {
+                     cout <<"invalid movement!"<<endl;
+                     return false;}
                } else { // new_row < curr_row
-                  if(!board[curr_row - 1][curr_col + 2].get_team_colour().empty()) {return;}
+                  if(!board[curr_row - 1][curr_col + 2].get_team_colour().empty()) {
+                     cout <<"invalid movement!"<<endl;
+                     return false;}
                }
             } else{ // new_col < curr_col
-               if(!board[curr_row][curr_col - 1].get_team_colour().empty()) {return;}
+               if(!board[curr_row][curr_col - 1].get_team_colour().empty()) {
+                  cout <<"invalid movement!"<<endl;
+                  return false;}
                if(new_row > curr_row) {
-                  if(!board[curr_row + 1][curr_col - 2].get_team_colour().empty()) {return;}
+                  if(!board[curr_row + 1][curr_col - 2].get_team_colour().empty()) {
+                     cout <<"invalid movement!"<<endl;
+                     return false;}
                } else { // new_row < curr_row
-                  if(!board[curr_row - 1][curr_col - 2].get_team_colour().empty()) {return;}
+                  if(!board[curr_row - 1][curr_col - 2].get_team_colour().empty()) {
+                     cout <<"invalid movement!"<<endl;
+                     return false;}
                }
             }
          } else { // when abs_row == 3, means it moves up or down first (row)
             // check if it is trying to jump over
             if(new_row > curr_row) {
-               if(!board[curr_row + 1][curr_col].get_team_colour().empty()) {return;}
+               if(!board[curr_row + 1][curr_col].get_team_colour().empty()) {
+                  cout <<"invalid movement!"<<endl;
+                  return false;}
                if(new_col > curr_col) {
-                  if(!board[curr_row + 2][curr_col + 1].get_team_colour().empty()) {return;}
+                  if(!board[curr_row + 2][curr_col + 1].get_team_colour().empty()) {
+                     cout <<"invalid movement!"<<endl;
+                     return false;}
                } else { // new_col < curr_col
-                  if(!board[curr_row + 2][curr_col - 1].get_team_colour().empty()) {return;}
+                  if(!board[curr_row + 2][curr_col - 1].get_team_colour().empty()) {
+                     cout <<"invalid movement!"<<endl;
+                     return false;}
                }
             } else{ // new_row < curr_row
-               if(!board[curr_row -1][curr_col].get_team_colour().empty()) {return;}
+               if(!board[curr_row -1][curr_col].get_team_colour().empty()) {
+                  cout <<"invalid movement!"<<endl;
+                  return false;}
                if(new_col > curr_col) {
-                  if(!board[curr_row - 2][curr_col + 1].get_team_colour().empty()) {return;}
+                  if(!board[curr_row - 2][curr_col + 1].get_team_colour().empty()) {
+                     cout <<"invalid movement!"<<endl;
+                     return false;}
                } else { // new_col < curr_col
-                  if(!board[curr_row - 2][curr_col - 1].get_team_colour().empty()) {return;}
+                  if(!board[curr_row - 2][curr_col - 1].get_team_colour().empty()) {
+                     cout <<"invalid movement!"<<endl;
+                     return false;}
                }
             }
          } 
@@ -203,9 +236,11 @@ void Janggi_Board::renew_state(Janggi_Piece p1, int new_row, int new_col) {
       board[new_row][new_col] = p1;
 
       display_board();
+      return true;
    } else {
-      cout<<"invalid move!"<<endl;
+      cout <<"invalid movement!"<<endl;
+      return false;
    }
 
-   return;
+   return false;
 }

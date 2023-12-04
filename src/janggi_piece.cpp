@@ -97,10 +97,24 @@ bool Janggi_Piece::move(int new_row, int new_col){
         if(abs_row == 2 && abs_col == 3) {return true;}
         return false;
     }
-    /*
-    if(hanja == CHARIOT_RED || CHARIOT_BLUE) {
-
+    if(hanja == CHARIOT_RED || hanja == CHARIOT_BLUE) {
+        // chariots can only move orthogonally
+        if(abs_row != 0) {
+            if(abs_col != 0) {
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            if(abs_col == 0) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        return false;
     }
+    /*
     if(hanja == CANNON_RED || CANNON_BLUE) {
 
     }
