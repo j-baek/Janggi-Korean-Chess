@@ -256,7 +256,9 @@ bool Janggi_Board::renew_state(Janggi_Piece p1, int new_row, int new_col) {
                other_p = board[curr_row][i];
             }
             // if it tries to jump over other piece, it is not a valid move.
-            if(!other_p.get_team_colour().empty()) {return false;}
+            if(!other_p.get_team_colour().empty()) {
+               cout <<"invalid movement!"<<endl;
+               return false;}
          }
       }
 
@@ -265,7 +267,9 @@ bool Janggi_Board::renew_state(Janggi_Piece p1, int new_row, int new_col) {
       if(p1.get_name() == CANNON_RED || p1.get_name() == CANNON_BLUE) {
          // first, check if desitnation is another cannon
          if(board[new_row][new_col].get_name() == CANNON_RED ||
-            board[new_row][new_col].get_name() == CANNON_BLUE) {return false;}
+            board[new_row][new_col].get_name() == CANNON_BLUE) {
+            cout <<"invalid movement!"<<endl;
+            return false;}
 
          int i_start;
          int i_end;
@@ -302,11 +306,15 @@ bool Janggi_Board::renew_state(Janggi_Piece p1, int new_row, int new_col) {
                if(p_jump.get_name() == CANNON_RED || p_jump.get_name() == CANNON_BLUE) {return false;}
                count_piece++;
                // if it is trying to jump more than one piece, it is not a valid move
-               if(count_piece > 1) {return false;}
+               if(count_piece > 1) {
+                  cout <<"invalid movement!"<<endl;
+                  return false;}
             }
          }
          // only valid move is if it jumps over exactly one piece
-         if(count_piece != 1) {return false;}
+         if(count_piece != 1) {
+            cout <<"invalid movement!"<<endl;
+            return false;}
       }
       
       tuple<int,int> new_pos(new_row,new_col);
