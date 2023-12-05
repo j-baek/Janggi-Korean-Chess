@@ -225,6 +225,40 @@ bool Janggi_Board::renew_state(Janggi_Piece p1, int new_row, int new_col) {
             }
          } 
       }
+      // condition for chariots: it cannot jump over other pieces
+      if(p1.get_name() == CHARIOT_RED || p1.get_name() == CHARIOT_BLUE) {
+         int i_start;
+         int i_end;
+
+         if(abs_row != 0){ // when moving up or down 
+            if(new_row > curr_row){
+               i_start = curr_row;
+               i_end = new_row;
+            } else {
+               i_start = new_row;
+               i_end = curr_row;
+            }
+         } else { // when moving right or left
+            if(new_col > curr_col) {
+               i_start = curr_col;
+               i_end = new_col;
+            } else {
+               i_start = new_col;
+               i_end = curr_col;
+            }
+         }
+
+         for(int i = i_start + 1; i < i_end; i++) {
+            Janggi_Piece other_p;
+            if(abs_row != 0){ // when moving up or down
+               other_p = board[i][curr_col];
+            } else { // when moving right of left
+               other_p = board[curr_row][i];
+            }
+            // if it tries to jump over other piece, it is not a valid move.
+            if(!other_p.get_team_colour().empty()) {return false;}
+         }
+      }
 
       // condition for cannons: it must jump over one other piece
       // and cannon cannot jump over or attack other cannons
