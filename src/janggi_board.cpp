@@ -225,6 +225,56 @@ bool Janggi_Board::renew_state(Janggi_Piece p1, int new_row, int new_col) {
             }
          } 
       }
+
+      // condition for cannons: it must jump over one other piece
+      // and cannon cannot jump over or attack other cannons
+      if(p1.get_name() == CANNON_RED || p1.get_name() == CANNON_BLUE) {
+         // first, check if desitnation is another cannon
+         if(board[new_row][new_col].get_name() == CANNON_RED ||
+            board[new_row][new_col].get_name() == CANNON_BLUE) {return false;}
+
+         int i_start;
+         int i_end;
+
+         if(abs_row != 0){ // when moving up or down 
+            if(new_row > curr_row){
+               i_start = curr_row;
+               i_end = new_row;
+            } else {
+               i_start = new_row;
+               i_end = curr_row;
+            }
+         } else { // when moving right or left
+            if(new_col > curr_col) {
+               i_start = curr_col;
+               i_end = new_col;
+            } else {
+               i_start = new_col;
+               i_end = curr_col;
+            }
+         }
+
+         // check if cannon is jumping over exactly one piece, and the piece is not a cannon
+         int count_piece = 0;
+         for(int i = i_start + 1; i < i_end; i++) {
+            Janggi_Piece p_jump;
+            if(abs_row != 0){ // when moving up or down
+               p_jump = board[i][curr_col];
+            } else { // when moving right of left
+               p_jump = board[curr_row][i];
+            }
+            if(!p_jump.get_team_colour().empty()) { // check if it is not a dummpy piece
+               // if it is jumping over cannon, it is not a valid move
+               if(p_jump.get_name() == CANNON_RED || p_jump.get_name() == CANNON_BLUE) {return false;}
+               count_piece++;
+               // if it is trying to jump more than one piece, it is not a valid move
+               if(count_piece > 1) {return false;}
+            }
+         }
+         // only valid move is if it jumps over exactly one piece
+         if(count_piece != 1) {return false;}
+      }
+
       
       tuple<int,int> new_pos(new_row,new_col);
       p1.renew_pos(new_pos);

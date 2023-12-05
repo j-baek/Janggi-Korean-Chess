@@ -91,14 +91,17 @@ bool Janggi_Piece::move(int new_row, int new_col){
         if(abs_row == 2 && abs_col == 1) {return true;}
         return false;
     }
+
     if(hanja == ELEPHANT_RED || hanja == ELEPHANT_BLUE) {
         // elephants can move one step orthogonally then two steps diagonally outwards, with no jumping 
         if(abs_row == 3 && abs_col == 2) {return true;}
         if(abs_row == 2 && abs_col == 3) {return true;}
         return false;
     }
-    if(hanja == CHARIOT_RED || hanja == CHARIOT_BLUE) {
-        // chariots can only move orthogonally
+
+    if(hanja == CHARIOT_RED || hanja == CHARIOT_BLUE ||
+        hanja == CANNON_RED || hanja == CANNON_BLUE) {
+        // chariots and cannons can only move orthogonally
         if(abs_row != 0) {
             if(abs_col != 0) {
                 return false;
@@ -114,11 +117,7 @@ bool Janggi_Piece::move(int new_row, int new_col){
         }
         return false;
     }
-    /*
-    if(hanja == CANNON_RED || hanja == CANNON_BLUE) {
 
-    }
-    */
     if(hanja == SOLDIER_RED || hanja == SOLDIER_BLUE) {
         // soldiers can only move orthogonal, and it cannot move back 
         if(hanja == SOLDIER_RED) {
