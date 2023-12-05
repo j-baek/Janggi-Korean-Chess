@@ -274,7 +274,6 @@ bool Janggi_Board::renew_state(Janggi_Piece p1, int new_row, int new_col) {
          // only valid move is if it jumps over exactly one piece
          if(count_piece != 1) {return false;}
       }
-
       
       tuple<int,int> new_pos(new_row,new_col);
       p1.renew_pos(new_pos);
