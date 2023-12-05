@@ -115,13 +115,26 @@ bool Janggi_Piece::move(int new_row, int new_col){
         return false;
     }
     /*
-    if(hanja == CANNON_RED || CANNON_BLUE) {
-
-    }
-    if(hanja == SOLDIER_RED || SOLDIER_BLUE) {
+    if(hanja == CANNON_RED || hanja == CANNON_BLUE) {
 
     }
     */
+    if(hanja == SOLDIER_RED || hanja == SOLDIER_BLUE) {
+        // soldiers can only move orthogonal, and it cannot move back 
+        if(hanja == SOLDIER_RED) {
+            // for red soldier, it can only move down (next_row >= curr_row)
+            if (p_row > new_row) {return false;}
+        } else { // hanja == SOLDIER_BLUE
+            // for blue soldier, it can only move up (next_row <= curr_row)
+            if (p_row < new_row) {return false;}
+        }
+
+        // checking if it is moving orthogonal
+        if(abs_row == 1 && abs_col == 0) {return true;}
+        if(abs_row == 0 && abs_col == 1) {return true;}
+
+        return false;
+    }
     return false;
 }
 void Janggi_Piece::renew_pos(tuple<int,int> new_pos){
