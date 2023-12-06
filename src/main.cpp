@@ -2,12 +2,20 @@
 #include "janggi_piece.h"
 #include "janggi_board.h"
 
+void play_game();
 int main() {
 
+    play_game();
+
+    return 0;
+}
+
+void play_game() {
     Janggi_Board b = Janggi_Board();
 
     b.display_board();
 
+    // when turn is even, blue team's turn, and when odd, red team's turn
     int turn = 0;
     // game start
     while(true) {
@@ -15,8 +23,22 @@ int main() {
         int col;
         int new_row;
         int new_col;
-        cout<<"please select a piece: (row, col)"<<endl;
-        cin >> row >> col;
+        string team;
+        int turn_indicate = 0;
+
+        do {
+            cout <<"Plase select a piece: (row, col)"<<endl;
+            cin >> row >> col;
+            team = b.get_board()[row][col].get_team_colour();
+            if(team == "blue") {
+                turn_indicate = 0;
+            } else if(team == "red"){
+                turn_indicate = 1;
+            } else {
+                turn_indicate = -1;
+            }            
+            // if the piece is a dummpy piece, or is not their team, keep looping
+        } while(team.empty() || turn_indicate != (turn % 2)); 
         Janggi_Piece p = b.get_board()[row][col];
         cout<<p.get_name()<<" chosed"<<endl;
     
@@ -29,9 +51,5 @@ int main() {
         turn++;
     }
 
-
-
-
-
-    return 0;
+    return;
 }
