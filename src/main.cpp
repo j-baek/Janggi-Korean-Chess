@@ -33,14 +33,11 @@ void play_game() {
         int new_col;
         string team;
         int turn_indicate = 0;
-
+        
         do {
             cout <<"Plase select a piece: (row, col)"<<endl;
-            cin >> row >> col;
-            // check if row and col are within the board boundaries
-            if(!(row < 0 || row >= b.get_board_row() || 
-                col < 0 || col >= b.get_board_col())){
-            
+            // check if row and col are integer and they are within the boundaries of the board
+            if((cin >> row >> col) && row >= 0 && row < b.get_board_row() && col >= 0 && col < b.get_board_col()){
                 team = b.get_board()[row][col].get_team_colour();
                 if(team == "blue") {
                 turn_indicate = 0;
@@ -49,6 +46,12 @@ void play_game() {
                 } else {
                     turn_indicate = -1;
                 }    
+            } else {
+                // clears the error state of the stream
+                cin.clear();
+                // discards the invalid input, ending with newline (as input is entered, which gives new line at the end)
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                team = "";
             }
             // if the piece is a dummpy piece, or is not their team, keep looping
         } while(team.empty() || turn_indicate != (turn % 2)); 
@@ -58,8 +61,15 @@ void play_game() {
     
         do {
             cout <<"please specify the position you want to move the piece to "<<endl;
-            cin >> new_row >> new_col;
+            // when inputs are not integer
+            if(!(cin >> new_row >> new_col)) {
+                // giving dummy values that won't be valid
+                new_row = -1;
+                new_col = -1;
 
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            }
         } while(!b.renew_state(p, new_row, new_col));
 
         turn++;
