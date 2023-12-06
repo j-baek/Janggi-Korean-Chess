@@ -3,6 +3,9 @@
 #include "janggi_piece.h"
 #include "janggi_board.h"
 
+#define GENERAL_RED     "\033[31m漢\033[0m"
+#define GENERAL_BLUE    "\033[34m楚\033[0m"
+
 void play_game();
 void clear_terminal();
 
@@ -20,8 +23,10 @@ void play_game() {
 
     // when turn is even, blue team's turn, and when odd, red team's turn
     int turn = 0;
+    // if general is dead, games ends
+    bool general_found = true;
     // game start
-    while(true) {
+    while(general_found) {
         int row;
         int col;
         int new_row;
@@ -54,6 +59,41 @@ void play_game() {
         turn++;
         clear_terminal();
         b.display_board();
+
+        // check if either general is dead
+        general_found = false;
+        // if previous turn was red's turn, check blue team's place
+        // and vice versa
+        if(turn % 2 == 0) { // previous turn would return 1, meaning red team's turn
+            // check blue team's palace
+            // row 7~9
+            // col 3~5
+            for(int r = 7; r <= 9; r++) {
+                for(int c= 3; c <= 5; c++) {
+                    if(b.get_board()[r][c].get_name() == GENERAL_BLUE) {
+                        general_found = true;
+                    }
+                }
+            }
+            if(general_found == false) {
+                cout <<"red team win!"<<endl<<endl;
+            }
+        } else {
+            // check red team's palace
+            // row 0~2
+            // col 3~5
+            general_found = false;
+            for(int r = 0; r <= 2; r++) {
+                for(int c = 3; c <= 5; c++) {
+                    if(b.get_board()[r][c].get_name() == GENERAL_RED) {
+                        general_found = true;
+                    }
+                }
+            }
+            if(general_found == false) {
+                cout <<"blue team win!"<<endl<<endl;
+            }
+        }
     }
 
     return;
