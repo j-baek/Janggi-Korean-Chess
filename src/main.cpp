@@ -52,6 +52,7 @@ void play_game() {
             }
             // if the piece is a dummpy piece, or is not their team, keep looping
         } while(team.empty() || turn_indicate != (turn % 2)); 
+        
         Janggi_Piece p = b.get_board()[row][col];
         cout<<p.get_name()<<" chosed"<<endl;
     
