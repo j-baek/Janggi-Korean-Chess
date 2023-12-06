@@ -1,8 +1,11 @@
 #include <iostream>
+#include <cstdlib>
 #include "janggi_piece.h"
 #include "janggi_board.h"
 
 void play_game();
+void clear_terminal();
+
 int main() {
 
     play_game();
@@ -12,7 +15,7 @@ int main() {
 
 void play_game() {
     Janggi_Board b = Janggi_Board();
-
+    clear_terminal();
     b.display_board();
 
     // when turn is even, blue team's turn, and when odd, red team's turn
@@ -49,7 +52,20 @@ void play_game() {
         } while(!b.renew_state(p, new_row, new_col));
 
         turn++;
+        clear_terminal();
+        b.display_board();
     }
 
     return;
+}
+
+void clear_terminal() {
+    #ifdef _WIN32
+        system("cls"); // for Windows
+    #elif __linux__ || __unix__ || __APPLE__
+        system("clear");
+    #else 
+        // unsupported os
+        #error "Unsupported operating system"
+    #endif
 }

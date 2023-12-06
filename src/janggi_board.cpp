@@ -326,7 +326,6 @@ bool Janggi_Board::renew_state(Janggi_Piece p1, int new_row, int new_col) {
       // put p1 on a new position
       board[new_row][new_col] = p1;
 
-      display_board();
       return true;
    } else {
       cout <<"invalid movement!"<<endl;
