@@ -37,14 +37,19 @@ void play_game() {
         do {
             cout <<"Plase select a piece: (row, col)"<<endl;
             cin >> row >> col;
-            team = b.get_board()[row][col].get_team_colour();
-            if(team == "blue") {
+            // check if row and col are within the board boundaries
+            if(!(row < 0 || row >= b.get_board_row() || 
+                col < 0 || col >= b.get_board_col())){
+            
+                team = b.get_board()[row][col].get_team_colour();
+                if(team == "blue") {
                 turn_indicate = 0;
-            } else if(team == "red"){
-                turn_indicate = 1;
-            } else {
-                turn_indicate = -1;
-            }            
+                } else if(team == "red"){
+                    turn_indicate = 1;
+                } else {
+                    turn_indicate = -1;
+                }    
+            }
             // if the piece is a dummpy piece, or is not their team, keep looping
         } while(team.empty() || turn_indicate != (turn % 2)); 
         Janggi_Piece p = b.get_board()[row][col];

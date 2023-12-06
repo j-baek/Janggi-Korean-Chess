@@ -334,3 +334,12 @@ bool Janggi_Board::renew_state(Janggi_Piece p1, int new_row, int new_col) {
 
    return false;
 }
+
+// get size of row 
+int Janggi_Board::get_board_row() {
+   return row;
+}
+// get size of column
+int Janggi_Board::get_board_col() {
+   return col;
+}

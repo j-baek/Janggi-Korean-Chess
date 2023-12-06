@@ -21,7 +21,11 @@ public:
     // return board
     vector<vector<Janggi_Piece>> get_board();
     // renew the board state when changes happen to janggi pieces
-    bool renew_state(Janggi_Piece p1, int new_row, int new_col);
+    bool renew_state(Janggi_Piece p1, int new_row, int new_col);   
+    // get size of row 
+    int get_board_row();
+    // get size of column
+    int get_board_col();
 
 private:
     int row = 10;
