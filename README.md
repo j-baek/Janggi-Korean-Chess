@@ -8,9 +8,9 @@ Janggi (Korean Chess) is a fun board game. Now you can play Janggi on a terminal
 ## check-list for Janggi (Korean Chess)
 - [X] make a board and display it 
 - [X] make objects for each janggi piece
-- [X] display a board
 - [X] display janggi pieces on a board
-- [X] make functions for janggi objects (renewing its state when moved)
+- [X] make move function for each janggi piece
+- [X] renew the board and display it
 - [X] make a function that checks if either general is dead. If one of the general dies, the game ends and the team that kills the general wins
 
 ### Rules
