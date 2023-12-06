@@ -21,21 +21,21 @@ for detailed rules, click the link: https://en.wikipedia.org/wiki/Janggi
 $${\color{red}漢}$$
 
 $${\color{blue}楚}$$
-- they have to stay on their own palace
+- they have to stay in their palace
   <br />
   (for red team, row: 0-2, col: 3-5, inclusive)
   <br />
   (for blue team, row: 7-9, col: 3-5, inclusive)
 - they can move one step orthogonally only
 - they can always move to the center of the palace (diagonal movement allowed for going to the center)
-- when general dies, the game ends
-<br />
+- when either dies, the game ends
+
 ### Guards
 
 $${\color{red}士}$$
 
 $${\color{blue}士}$$
-- their movement restriction is same as generals
+- their movement restriction is the same as generals
 
 ### Horses
 $${\color{red}馬}$$
@@ -56,15 +56,15 @@ $${\color{red}車}$$
 
 $${\color{blue}車}$$
 - they can move orthogonally only, with no jumping
-- they can have as many steps as possible, until encounter the end of the board or other pieces
+- they can have as many steps as possible until encounter the end of the board or other pieces
 
 ### Cannons
 $${\color{red}包}$$
 
 $${\color{blue}包}$$
 - they can move orthogonally only, with one jump
-- if there are no other piece to jump over, their movement is restricted
-- they cannot jump over more than one pice
+- if there are no other pieces to jump over, their movement is restricted
+- they cannot jump over more than one piece
 - they cannot jump over other cannon, nor attack other cannon
 
 ### Soldiers
