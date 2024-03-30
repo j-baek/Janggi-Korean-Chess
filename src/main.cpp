@@ -35,7 +35,7 @@ void play_game() {
         int turn_indicate = 0;
         
         do {
-            cout <<"Plase select a piece: (row, col)"<<endl;
+            cout <<"Please select a piece: (row, col)"<<endl;
             // check if row and col are integer and they are within the boundaries of the board
             if((cin >> row >> col) && row >= 0 && row < b.get_board_row() && col >= 0 && col < b.get_board_col()){
                 team = b.get_board()[row][col].get_team_colour();
@@ -47,6 +47,9 @@ void play_game() {
                     turn_indicate = -1;
                 }    
             } else {
+                if(row == -1 && col == -1) { //game-end code
+                    return;
+                }
                 // clears the error state of the stream
                 cin.clear();
                 // discards the invalid input, ending with newline (as input is entered, which gives new line at the end)
